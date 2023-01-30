@@ -16,10 +16,16 @@ if (!$con){
 
 $name = $_POST['name'];
 $bill = $_POST['billno'];
+$item =$_POST['items'];
+$amount = $_POST['amount'];
+$payment = $_POST['payment'];
 
-$sql = "INSERT INTO `bill updater`.`detail` (`name`, `billno`, `date`) VALUES ('$name','$bill',current_timestamp());";
+    var_dump ($_POST)."<br>";
+
+$sql = "INSERT INTO `bill updater`.`detail` (`name`, `billno`,`items`,`amount`,`payment`, `date`) VALUES ('$name','$bill','$items','$amount','$payment',current_timestamp());";
 
 if($con->query($sql)==true){
+    
     echo "Successfully inserted";
     $insert = true;
 }
