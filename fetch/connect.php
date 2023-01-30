@@ -6,7 +6,7 @@ $result = mysqli_query($con,$sql) or die("Query Failed");
 $row= mysqli_fetch_assoc($result);
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,18 +23,18 @@ $row= mysqli_fetch_assoc($result);
             <th>Date</th>
         </tr>
     <?php 
-        while($row=$result->fetch_assoc())
+      //  while($row=$result->fetch_assoc())
         {
     ?>
         <tr>
-            <td><?php echo $row['serial'];?></td>
-            <td><?php echo $row['name'];?></td>
-            <td><?php echo $row['billno'];?></td>
-            <td><?php echo $row['date'];?></td>
+            <td><?php //echo $row['serial'];?></td>
+            <td><?php //echo $row['name'];?></td>
+            <td><?php //echo $row['billno'];?></td>
+            <td><?php //echo $row['date'];?></td>
         </tr>
         <?php
         }
         ?>    
     </table>
-</body>
+</body> -->
 </html>

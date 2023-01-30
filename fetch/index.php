@@ -1,3 +1,12 @@
+<?php 
+$con = mysqli_connect("localhost","root","","bill updater") or die("Connection Failed");
+$sql = "SELECT * FROM detail";
+$result = mysqli_query($con,$sql) or die("Query Failed");
+
+$row= mysqli_fetch_assoc($result);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +21,9 @@
             <th>ID Number</th>
             <th>Company Name</th>
             <th>Bill Number</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Payment</th>
             <th>Date</th>
         </tr>
     <?php 
@@ -19,9 +31,12 @@
         {
     ?>
         <tr>
-            <td><?php echo $row['id'];?></td>
+            <td><?php echo $row['serial'];?></td>
             <td><?php echo $row['name'];?></td>
             <td><?php echo $row['billno'];?></td>
+            <td><?php echo $row['items'];?></td>
+            <td><?php echo $row['amount'];?></td>
+            <td><?php echo $row['payment'];?></td>
             <td><?php echo $row['date'];?></td>
         </tr>
         <?php
