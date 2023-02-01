@@ -3,10 +3,11 @@
 $con = mysqli_connect("localhost","root","","bill updater") or die("Connection Failed");
 $sql = "SELECT * FROM detail";
 $result = mysqli_query($con,$sql) or die("Query Failed");
-
 $row= mysqli_fetch_assoc($result);
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +15,13 @@ $row= mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bill View</title>
 </head>
 <body>
-    <form action = "index.php" method ="post">
-        <input type="text" name ="search" id="search" placeholder="Search" >
+    <form action = "" method ="post">
+        <input type="text" name ="search" id="search" placeholder="Search" required>
         <button type="submit">Search</button>
-    </form>
+        </form>
 
     <table>
         <tr>
@@ -31,10 +32,11 @@ $row= mysqli_fetch_assoc($result);
             <th>Amount</th>
             <th>Payment</th>
             <th>Date</th>
+            <th>File</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
-    <?php 
+    <?php
         while($row=$result->fetch_assoc())
         {
     ?>
@@ -46,7 +48,11 @@ $row= mysqli_fetch_assoc($result);
             <td><?php echo $row['amount'];?></td>
             <td><?php echo $row['payment'];?></td>
             <td><?php echo $row['date'];?></td>
-
+            <form action = "pdf.php" method="post">
+            <input type="hidden" name="serial" value="<?php echo $row['serial']?>">
+                <th><input type="submit" value="View File" name="view">
+                </th></form>    
+            
             <form action="update.php" method="post">
                 <input type="hidden" name="serial" value="<?php echo $row['serial']?>">
                 <th><input type="submit" value="Update" name="updater">
@@ -54,7 +60,7 @@ $row= mysqli_fetch_assoc($result);
 
             <form action="delete.php" method="post">
                 <input type="hidden" name="serial" value="<?php echo $row['serial']?>">
-                <th><input type="submit" value ="Delete" name="delete"></button>
+                <th><button type="submit" value ="Delete" name="delete" onclick="return confirm('Are you sure?')">Delete</button>
                 </th></form>
         </tr>   
         <?php
@@ -64,15 +70,16 @@ $row= mysqli_fetch_assoc($result);
 </body>
 </html>
 
+
 <?php
+#search
 include 'connect.php';
 global $con;
 if(isset( $_POST['search'])){
     $search = $_POST['search'];
     mysqli_select_db($con,$dbname);
 
-
-$sql = "SELECT * from `detail` WHERE name= '$search'";
+$sql = "SELECT * from detail WHERE name= '$search' or billno='$search'  or items='$search' or amount='$search' or payment='$search' ";
 $result = mysqli_query($con,$sql);
 
 while ($row = mysqli_fetch_array($result)) {
@@ -91,6 +98,5 @@ while ($row = mysqli_fetch_array($result)) {
     echo "<br>"."Payment : ".($payment);
     echo "<br>"."Date : ".($date)."<br>"."<br>";
 }
-
 }
 ?>

@@ -6,7 +6,7 @@
         $del = ("DELETE FROM detail WHERE serial ='$serial'");
         $result = mysqli_query($con,$del);
 
-        if($result==True){
+        if($result){
             echo "Deleted";
             header ("location:index.php");
         }

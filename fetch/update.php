@@ -20,9 +20,9 @@ if(isset($_POST['updater'])){
         echo "Please Update";
         while($row=mysqli_fetch_array($result)){
             ?>
-
-            <form action="" method="post">
-            <input type="hidden" name="serial" value="<?php echo $row["serial"]?>">
+            
+            <form action="updatefile.php" method="post">
+            <input type="hidden" name="serial" placeholder="serial" value="<?php echo $row["serial"]?>">
             <input type = "text" name="name" id="name" placeholder ="Company Name" required value="<?php echo $row["name"]?>">
             <input type = "number" min="1" name="billno" id="billno" placeholder ="Bill Number" required value="<?php echo $row["billno"]?>">
             <input type="text" name = "items" id="items" placeholder="Items" required value="<?php echo $row["items"]?>">
@@ -33,35 +33,13 @@ if(isset($_POST['updater'])){
             <a href="index.php">Cancel</a>
             </form>
 
-            <?php
-                if(isset($_POST['updated'])){
-                $name = $_POST['name'];
-                $billno = $_POST['billno'];
-                $items = $_POST['items'];
-                $amount = $_POST['amount'];
-                $payment = $_POST['payment']; 
-
-                $serial = $_POST['serial'];
-
-                $query = "UPDATE detail SET name = '$name' , billno = '$billno', items ='$items', amount = '$amount', payment = '$payment' WHERE serial ='$serial' ";
-                
-                $re = mysqli_query($con,$query);
-                if($re){
-                    echo "EUREKA";
-                }
-                else {
-                    echo "Nope, Its Not Updated!!";  }}
-                
-        }
-                }
-            ?>
+        
 
             <?php 
-        }
+        }}}
     
     else {
-        echo "Check Update Part";
-    }
+        echo "Check Update Part";  }
 
 ?>
 
